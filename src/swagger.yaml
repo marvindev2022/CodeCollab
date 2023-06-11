@@ -1,0 +1,230 @@
+paths:
+  /api/users/register:
+    post:
+      summary: Registrar um novo usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Usuário registrado com sucesso!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Usuário registrado com sucesso!
+
+  /api/users/login:
+    post:
+      summary: Login de usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login bem-sucedido!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Login bem-sucedido!
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+  /api/questions:
+    post:
+      summary: Criar uma nova postagem de dúvida
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+                category:
+                  type: string
+                tags:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Postagem de dúvida criada com sucesso!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Postagem de dúvida criada com sucesso!
+
+  /api/questions/{questionId}/comments:
+    post:
+      summary: Adicionar um comentário a uma postagem de dúvida
+      parameters:
+        - in: path
+          name: questionId
+          schema:
+            type: string
+          required: true
+          description: ID da postagem de dúvida
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Comentário adicionado com sucesso!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Comentário adicionado com sucesso!
+
+  /api/questions/{questionId}/like:
+    put:
+      summary: Curtir uma postagem de dúvida
+      parameters:
+        - in: path
+          name: questionId
+          schema:
+            type: string
+          required: true
+          description: ID da postagem de dúvida
+      responses:
+        '200':
+          description: Postagem curtida com sucesso!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                 
+message:
+type: string
+example: Postagem curtida com sucesso!
+
+/api/questions/search:
+get:
+summary: Pesquisar postagens de dúvida
+parameters:
+- in: query
+name: query
+schema:
+type: string
+required: true
+description: Termo de pesquisa
+responses:
+'200':
+description: Lista de postagens de dúvida correspondentes à pesquisa
+content:
+application/json:
+schema:
+type: object
+properties:
+success:
+type: boolean
+example: true
+questions:
+type: array
+items:
+type: object
+properties:
+id:
+type: string
+title:
+type: string
+content:
+type: string
+category:
+type: string
+tags:
+type: array
+items:
+type: string
+createdAt:
+type: string
+format: date-time
+updatedAt:
+type: string
+format: date-time
+
+/api/users/notifications/email:
+put:
+summary: Configurar notificações por email
+requestBody:
+required: true
+content:
+application/json:
+schema:
+type: object
+properties:
+enable:
+type: boolean
+responses:
+'200':
+description: Notificações por email configuradas com sucesso!
+content:
+application/json:
+schema:
+type: object
+properties:
+success:
+type: boolean
+example: true
+message:
+type: string
+example: Notificações por email configuradas com sucesso!
