@@ -1,3 +1,15 @@
+ openapi: "3.0.0",
+    info: {
+      title: "API do Fórum de Dúvidas",
+      version: "1.0.0",
+      description:
+        "Bem-vindo à API do Fórum de Dúvidas! Esta API permite o registro de usuários, publicação de dúvidas, interação com as postagens e notificações."
+    },
+    servers: [
+      {
+        url: "https://code-collab-eight.vercel.app/"
+      }
+    ],
 paths:
   /api/users/register:
     post:

@@ -22,10 +22,10 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:4000"
+        url: "https://code-collab-eight.vercel.app"
       }
     ],
-    paths: config 
+    paths: config
   },
   apis: ["./router/router.ts"]
 };
